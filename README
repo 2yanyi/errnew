@@ -1,0 +1,4 @@
+General panic processing package
+
+install
+    go get github.com/das-security/errnew
