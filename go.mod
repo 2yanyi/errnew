@@ -1,3 +1,3 @@
-module github.com/das-security/errnew
+module github.com/xzyan/errnew
 
 go 1.15

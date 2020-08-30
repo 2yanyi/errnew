@@ -12,25 +12,25 @@ import (
 
 var __traceContinue_ = []string{"/usr/local/", "/github.com/"}
 
-// 对error追加描述
-func Join(err error, errMsg string) error {
-	return errors.New(f() + ": " + errMsg + "\n" + err.Error())
+// Join error description
+func Join(e error, errMsg string) error {
+	return errors.New(f() + ": " + errMsg + "\n" + e.Error())
 }
 
-// 对panic信息截取并记录
-func PanicTrace(err interface{}) {
+// PanicTrace and archive to log
+func PanicTrace(e interface{}) {
 	var now = time.Now().Local().Format(time.RFC3339)
-	var res = panicTrace(err, now)
+	var res = panicTrace(e, now)
 	println(res)
 	var f *os.File
-	f, err = os.OpenFile("panic-"+now[:10]+".log", 0x2|0x400|0x40, 0600)
-	if err == nil {
+	f, e = os.OpenFile("panic-"+now[:10]+".log", 0x2|0x400|0x40, 0600)
+	if e == nil {
 		_, _ = f.WriteString(res)
 		_ = f.Close()
 	}
 }
 
-func panicTrace(err interface{}, now string) (res string) {
+func panicTrace(e interface{}, now string) (res string) {
 	var msg string
 	var trace = make([]byte, 1<<16)
 	var stack = strings.Split(string(trace[:int(math.Min(float64(runtime.Stack(trace, true)), 5000))]), "\n")
@@ -49,7 +49,7 @@ func panicTrace(err interface{}, now string) (res string) {
 			msg += stack[i] + "\n"
 		}
 	}
-	res = fmt.Sprintf("[  ERROR  ] %s\npanic: %v\n%s\n", now, err, msg)
+	res = fmt.Sprintf("[  ERROR  ] %s\npanic: %v\n%s\n", now, e, msg)
 	return
 }
 
