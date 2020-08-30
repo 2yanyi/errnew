@@ -1,5 +1,5 @@
 # errnew
-👨‍💻Allows you to write panic in the program
+👨‍💻 Allows you to write panic in the program
 
 <br>
 
