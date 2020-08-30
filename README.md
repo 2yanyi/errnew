@@ -13,27 +13,25 @@ go get -v github.com/xzyan/errnew
 
 ```go
 func main {
-
-	go demo()
-
-	_ = http.ListenAndServe(":2000", nil)
+    go demo() // (1)
+    _ = http.ListenAndServe(":2000", nil)
 }
 
 func demo() {
-	defer func() {
-		if e := recover(); e != nil {
-			PanicTrace(e)
-		}
-	}()
-
-	demo_test()
+    defer func() {
+        if e := recover(); e != nil {
+            errnew.PanicTrace(e) // (2)
+        }
+    }()
+    
+    demo_test()
 }
 
 func demo_test() {
-	if _, e := ioutil.ReadFile("test.txt"); e != nil {
-		e = Join(e, "ioutil.ReadFile()")
-		panic(e)
-	}
+    if _, e := ioutil.ReadFile("test.txt"); e != nil {
+        e = errnew.Join(e, "ioutil.ReadFile()") // (3)
+        panic(e)
+    }
 }
 ```
 
