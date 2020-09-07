@@ -1,7 +1,4 @@
-# errnew
 👨‍💻 Allows you to write panic in the program
-
-<br>
 
 ### Installation
 
