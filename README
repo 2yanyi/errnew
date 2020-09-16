@@ -1,0 +1,12 @@
+errnew Allows you to write "panic" in the go program
+
+defer func() {
+    if e := recover(); e != nil {
+        errnew.PanicTrace(e)
+    }
+}()
+
+if _, e := ioutil.ReadFile("test.txt"); e != nil {
+    e = errnew.Join(e, "ioutil.ReadFile()")
+    panic(e)
+}
