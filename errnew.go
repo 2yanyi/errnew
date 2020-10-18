@@ -17,8 +17,8 @@ func Join(e error, errMsg string) error {
 	return errors.New(f() + ": " + errMsg + "\n" + e.Error())
 }
 
-// PanicTrace and archive to log
-func PanicTrace(e interface{}) {
+// Trace and archive to log
+func Trace(e interface{}) {
 	var now = time.Now().Local().Format(time.RFC3339)
 	var res = panicTrace(e, now)
 	println(res)
