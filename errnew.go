@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var __traceContinue_ = []string{"/usr/local/", "/github.com/"}
+var Continue []string
 
 // Join error description
 func Join(e error, errMsg string) error {
@@ -31,7 +31,7 @@ func Trace(e interface{}) {
 }
 
 func panicTrace(e interface{}, now string) (res string) {
-	var msg string
+	var message string
 	var trace = make([]byte, 1<<16)
 	var stack = strings.Split(string(trace[:int(math.Min(float64(runtime.Stack(trace, true)), 5000))]), "\n")
 	for i := range stack {
@@ -39,17 +39,17 @@ func panicTrace(e interface{}, now string) (res string) {
 			continue
 		}
 		has := true
-		for j := range __traceContinue_ {
-			if strings.Contains(stack[i], __traceContinue_[j]) {
+		for j := range Continue {
+			if strings.Contains(stack[i], Continue[j]) {
 				has = false
 				break
 			}
 		}
 		if has {
-			msg += stack[i] + "\n"
+			message += stack[i] + "\n"
 		}
 	}
-	res = fmt.Sprintf("[  ERROR  ] %s\npanic: %v\n%s\n", now, e, msg)
+	res = fmt.Sprintf("[  ERROR  ] %s\npanic: %v\n%s\n", now, e, message)
 	return
 }
 
