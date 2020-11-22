@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var Continue []string
+var Continue = []string{"/usr/local/"}
 
 // Join error description
 func Join(e error, errMsg string) error {
