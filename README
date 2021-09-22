@@ -3,4 +3,5 @@ errnew Allows you to write "panic" in the go program
 
 ---------------------------------
 
-该项目不建议再使用，新项目 https://github.com/matsuwin/siggroup/blob/master/errcause/errcause_test.go
+该项目不建议再使用，新项目
+https://github.com/matsuwin/siggroup/blob/master/errcause/errcause_test.go
